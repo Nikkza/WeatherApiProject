@@ -1,0 +1,7 @@
+﻿namespace WeatherApi.API
+{
+    public class Sys
+    {
+        public string pod { get; set; }
+    }
+}
