@@ -28,20 +28,14 @@ namespace WeatherApi.Logic
 
             catch (WebException ex)
             {
-                throw new ArgumentException(ex.Message);
+                throw new Exception(ex.Message);
             }
-
             return json;
         }
 
         public void WeahterResultsFromApi(RootObject root)
         {
-            var dateNow = DateTime.Now;
-            var date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day).ToString();
-            var sub = date.Substring(0, 10);
-            var k = root.list.Count;
-
-            if (k == 1)
+            if (root.list.Count == 1)
             {
                 Console.WriteLine("---------------------------only the lastest time------------------------");
                 foreach (var s in root.list)
@@ -52,11 +46,17 @@ namespace WeatherApi.Logic
                                       $"Wind: {s.wind.speed}");
                 }
             }
-            else if (k == 40)
+            else if (root.list.Count == 40)
             {
+                var dateNow = DateTime.Now;
+                var date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day).ToString();
+                var sub = date.Substring(0, 10);
                 var list = root.list.Where(x =>
-                    x.dt_txt.EndsWith("09:00:00") || x.dt_txt.EndsWith("12:00:00") || x.dt_txt.EndsWith("15:00:00") ||
-                    x.dt_txt.EndsWith("21:00:00"));
+                    x.dt_txt.EndsWith("09:00:00")
+                    || x.dt_txt.EndsWith("12:00:00")
+                    || x.dt_txt.EndsWith("15:00:00") 
+                    || x.dt_txt.EndsWith("21:00:00"));
+
                 Console.WriteLine("---------------------------times after------------------------");
                 foreach (var s in list.Skip(1))
                 {
