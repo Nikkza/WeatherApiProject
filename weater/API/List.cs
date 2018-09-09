@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WeatherApi.API
 {
-    public class List : IEnumerable
+    public class List
     {
         public int dt { get; set; }
         public Main main { get; set; }
@@ -12,9 +11,6 @@ namespace WeatherApi.API
         public Wind wind { get; set; }
         public Sys sys { get; set; }
         public string dt_txt { get; set; }
-        public IEnumerator GetEnumerator()
-        {
-            throw new System.NotImplementedException();
-        }
+
     }
 }
